@@ -14,4 +14,9 @@ class PollController extends Controller
 
         return view('poll', compact('title', 'options'));
     }
+
+    public function create()
+    {
+        return view('create');
+    }
 }

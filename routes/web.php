@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PollController@create');
 
 Route::get('/{poll}', 'PollController@index');
