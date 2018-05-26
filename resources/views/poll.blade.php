@@ -6,6 +6,13 @@
     <title>Polls</title>
 </head>
 <body>
-    <h1>Home</h1>
+    <h1>{{ $title }}</h1>
+
+    <ul>
+        @foreach($options as $option)
+            <li>{{ $option->name }} - {{ $option->votes }}</li>
+        @endforeach
+    </ul>
+
 </body>
 </html>
