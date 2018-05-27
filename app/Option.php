@@ -10,4 +10,11 @@ class Option extends Model
    {
        return $this->belongsTo('App\Poll');
    }
+
+   // Vote up once
+   public function vote()
+   {
+       $this->increment('votes');
+       return $this->votes;
+   }
 }

@@ -12,5 +12,6 @@
 */
 
 Route::get('/', 'PollController@create');
-
+Route::post('/', 'PollController@store');
 Route::get('/{poll}', 'PollController@index');
+Route::post('/vote/{option}', 'OptionController@vote');
