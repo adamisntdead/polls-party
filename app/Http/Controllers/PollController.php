@@ -37,11 +37,13 @@ class PollController extends Controller
 
         foreach ($request->input('options') as $option)
         {
-            $opt = new Option;
-            $opt->name = $option;
-            $opt->votes = 0;
-            $opt->poll_id = $poll->id;
-            $opt->save();
+            if ($option != "") {
+                $opt = new Option;
+                $opt->name = $option;
+                $opt->votes = 0;
+                $opt->poll_id = $poll->id;
+                $opt->save();
+            }
         }
 
         return redirect('/' . $poll->id);

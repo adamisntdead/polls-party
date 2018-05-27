@@ -3,27 +3,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Polls</title>
+    <title>polls.party - Easy Polls And Voting For Snapchat 👻</title>
+
+    <link rel="stylesheet" href="{{ url('/css/app.css') }}">
 </head>
 <body>
-    <h1>Home</h1>
-
-    @if ($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li style="color:red">{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
-
-    <form action="/" method="post">
+    <form class="container" action="/" method="post" autocomplete="off" onsubmit="return inputErrors()">
         @csrf
+        <textarea id="question-input" maxlength="60" rows="3" name="title" placeholder="Enter Your Question..."></textarea>
+        <div class="options-container" id="options-container"></div>
 
-        <input type="text" name="title" placeholder="Title" required>
-        <input type="text" name="options[]" placeholder="Opt">
-        <input type="text" name="options[]" placeholder="Opt">
-        <input type="text" name="options[]" placeholder="Opt">
-        <input type="submit" value="Create Poll">
+        <button type="submit">create the poll</button>
     </form>
+
+    <script src="{{ url('/js/create.js') }}"></script>
 </body>
 </html>
