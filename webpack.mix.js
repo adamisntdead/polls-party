@@ -12,4 +12,5 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/create.js', 'public/js')
+   .js('resources/assets/js/poll.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css');

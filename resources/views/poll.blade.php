@@ -3,47 +3,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Polls</title>
+    <title>{{ $title }} - polls.party</title>
+
+    <link rel="stylesheet" href="{{ url('/css/app.css') }}">
 </head>
 <body>
-    <h1>{{ $title }}</h1>
+    <div class="container">
+        <p id="question-input">{{ $title }}</p>
 
-    <ul id="options">
-        @foreach($options as $option)
-            <li id="{{ $option->id }}">{{ $option->name }} - {{ $option->votes }}</li>
-        @endforeach
-    </ul>
+        <div class="options-container" id="options">
+            @foreach($options as $option)
+                @if (!$loop->first)
+                    <hr>
+                @endif
+                <div class="option-item" id="{{ $option->id }}" onclick="optionClick(this)" votes="{{ $option->votes }}">
+                    <span>{{ $option->name }}</span>
+                </div>
+            @endforeach
+        </div>
+
+        <button id="results-button">See The Results</button>
+    </div>
 
     <script>
-        function vote(id) {
-            const request = new XMLHttpRequest();
-            request.open('POST', `/vote/${id}`, true);
-            request.setRequestHeader('X-CSRF-Token', '{{ csrf_token() }}')
-            request.send()
-        }
-
-        function ready(fn) {
-            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
-                fn();
-            } else {
-                document.addEventListener('DOMContentLoaded', fn);
-            }
-        }
-
-        function getEventTarget(e) {
-            e = e || window.event;
-            return e.target || e.srcElement;
-        }
-
-
-        ready(() => {
-            const optionsList = document.getElementById('options')
-            optionsList.onclick = (event) => {
-                const target = getEventTarget(event)
-                vote(target.id)
-            }
-        })
-
+        window.CSRF_TOKEN = '{{ csrf_token() }}'
     </script>
+    <script src="{{ url('/js/poll.js') }}"></script>
 </body>
 </html>
