@@ -1,0 +1,13 @@
+{
+  "name": "polls-party",
+  "version": "1.0.0",
+  "description": "Anonymous Location Based Polls",
+  "main": "app.js",
+  "repository": "https://github.com/adamisntdead/polls-party",
+  "author": "Adam Kelly",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "graphql-yoga": "^1.14.6"
+  }
+}
