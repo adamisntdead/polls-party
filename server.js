@@ -1,8 +1,11 @@
 import { GraphQLServer } from 'graphql-yoga'
 import { start, models } from './db'
 import resolvers from './graphql/resolvers'
+import dotenv from 'dotenv'
 
-const db = start('mongodb://localhost/polls')
+dotenv.config()
+
+const db = start(process.env.MONGODB_URI)
 const context = { models, db }
 
 const Server = new GraphQLServer({
