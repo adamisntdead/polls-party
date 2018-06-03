@@ -11,9 +11,14 @@ type Mutation {
   createPoll(title: String, latitude: Float, longitude: Float): Poll
 }
 
+type Location {
+  type: String,
+  coordinates: [Float]
+}
+
 # Schema Types
 type Poll {
   id: String!
   title: String
-  loc: [Float]
+  location: Location
 }

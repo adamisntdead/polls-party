@@ -8,14 +8,18 @@ export default {
     },
 
     pollsNear: async (parent, { latitude, longitude, distance }, { models }) => {
-      const coords = [latitude, longitude]
+      const coordinates = [latitude, longitude]
 
-      return models.Poll.find({ 
-        loc: { 
-          $geoWithin: {
-            $centerSphere: [ coords, distance / 3963.2 ]
+      return models.Poll.find({
+        location: {
+          $near: {
+            $maxDistance: distance,
+            $geometry: {
+              type: 'Point',
+              coordinates
+            }
           }
-        } 
+        }
       })
     }
   },
@@ -24,7 +28,9 @@ export default {
       // create a new post
       const newPoll = new models.Poll({
         title,
-        loc: [latitude, longitude]
+        location: {
+          coordinates: [latitude, longitude]
+        }
       })
 
       // save the post
