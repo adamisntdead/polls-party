@@ -1,16 +1,16 @@
-const { GraphQLServer } = require('graphql-yoga')
+import { GraphQLServer } from 'graphql-yoga'
+import { start, models } from './db'
+import resolvers from './graphql/resolvers'
 
-const typeDefs = `
-  type Query {
-    hello(name: String): String!
-  }
-`
+const db = start('mongodb://localhost/polls')
+const context = { models, db }
 
-const resolvers = {
-  Query: {
-    hello: (_, { name }) => `Hello ${name || 'world'}`
-  }
-}
+const Server = new GraphQLServer({
+  typeDefs: `${__dirname}/graphql/schema.graphql`,
+  resolvers,
+  context
+})
 
-const server = new GraphQLServer({ typeDefs, resolvers })
-server.start(() => console.log('Server running on localhost:4000'))
+Server.start({ port: 4000 }, () => {
+  console.log('Server is running on http://localhost:4000')
+})

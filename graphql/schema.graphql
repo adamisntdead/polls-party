@@ -1,0 +1,13 @@
+type Query {
+  polls: [Poll!]!
+}
+
+type Mutation {
+  createPoll(title: String): Poll
+}
+
+# Schema Types
+type Poll {
+  id: String!
+  title: String
+}
