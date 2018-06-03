@@ -1,13 +1,19 @@
 type Query {
+  # Generic Poll Queries
   polls: [Poll!]!
+  poll(id: String): Poll
+
+  # Geospatial Queries
+  pollsNear(latitude: Float, longitude: Float, distance: Float): [Poll!]! 
 }
 
 type Mutation {
-  createPoll(title: String): Poll
+  createPoll(title: String, latitude: Float, longitude: Float): Poll
 }
 
 # Schema Types
 type Poll {
   id: String!
   title: String
+  loc: [Float]
 }
